@@ -1,0 +1,42 @@
+int ledpins[] = {2,3,4,5,6}; int numled = 5;
+void setup() {
+
+for (int i=0 ; i< numled; i++){ pinMode(ledpins[i],OUTPUT); } Serial.begin(9600);
+}
+
+void loop() {
+
+if (Serial.available() > 0) {
+
+int fingerCount= Serial.parseInt(); Serial.println(fingerCount); for (int i =0;i< numled;i++){ if
+(i<fingerCount){ digitalWrite(ledpins[i],HIGH);
+}else{	digitalWrite(ledpins[i],LOW);
+
+}
+
+}
+ 
+}
+
+}
+
+const int trigPin = 9; const int echoPin = 10; const int buzzerPin = 12 long duration; int distance; void
+setup() {
+
+pinMode(trigPin, OUTPUT); pinMode(echoPin, INPUT); pinMode(buzzerPin, OUTPUT); Serial.begin(9600);
+}
+void loop() {
+
+// Clear the trigPin digitalWrite(trigPin,
+ 
+delayMicroseconds(2); 
+digitalWrite(trigPin, HIGH); delayMicroseconds(10);
+digitalWrite(trigPin, LOW); duration = pulseIn(echoPin, HIGH);
+distance = duration * 0.034 / 2; Serial.print("Distance: ");
+
+Serial.print(distance); Serial.println(" cm");
+if (distance < 5) { digitalWrite(buzzerPin, HIGH); delay(1000); 
+digitalWrite(buzzerPin, LOW); delay(1000);	}
+delay(100);
+
+}
